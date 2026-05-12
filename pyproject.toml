@@ -27,7 +27,7 @@ Repository = "https://github.com/lodgev/mkdocs-docs-hub"
 Issues = "https://github.com/lodgev/mkdocs-docs-hub/issues"
 
 [project.entry-points."mkdocs.themes"]
-mkdocs-docs-hub = "mkdocs-docs-hub"
+docs-hub = "docs-hub"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
@@ -37,7 +37,7 @@ include-package-data = true
 where = ["src"]
 
 [tool.setuptools.package-data]
-mkdocs-docs-hub = [
+docs-hub = [
   "mkdocs_theme.yml",
   "*.html",
   "partials/*.html",
