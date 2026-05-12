@@ -1,0 +1,32 @@
+{# -------------------------------------------------------------------------
+   Primary sidebar
+   - Brand block links to the homepage when available
+   - Top-level nav items link either to their own URL or to the first child
+   ------------------------------------------------------------------------- #}
+
+<aside id="sidebar" class="dh-sidebar">
+  <a href="{{ nav.homepage.url|url if nav and nav.homepage else '#' }}" class="brand">
+    <span class="brand-copy">
+      <strong>{{ config.site_name }}</strong>
+      <small>{{ config.site_description|default('dashboard-style docs') }}</small>
+    </span>
+  </a>
+
+  <ul class="side-menu top">
+    {% if nav %}
+      {% for item in nav %}
+        {% if item.children %}
+          {% set target = item.children[0].url %}
+        {% else %}
+          {% set target = item.url %}
+        {% endif %}
+
+        <li class="dh-nav-item{% if item.active %} active{% endif %}">
+          <a href="{{ target|url }}">
+            <span class="text">{{ item.title }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    {% endif %}
+  </ul>
+</aside>

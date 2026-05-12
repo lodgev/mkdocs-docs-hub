@@ -1,0 +1,45 @@
+{# -------------------------------------------------------------------------
+   Right-side section navigation
+   Detects the active top-level section and renders its children, including
+   one nested level for grandchildren.
+   ------------------------------------------------------------------------- #}
+
+{% set active_section = none %}
+
+{% if nav %}
+  {% for item in nav %}
+    {% if item.active and item.children %}
+      {% set active_section = item %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if active_section %}
+  <aside class="dh-section-nav-card">
+    <div class="dh-section-nav-header">
+      <h2>{{ active_section.title }}</h2>
+    </div>
+
+    <ul class="dh-section-nav-list">
+      {% for child in active_section.children %}
+        <li class="dh-section-nav-item{% if child.active %} is-active{% endif %}">
+          <a href="{{ child.url|url }}">
+            <span class="text">{{ child.title }}</span>
+          </a>
+
+          {% if child.children %}
+            <ul class="dh-section-subnav-list">
+              {% for grandchild in child.children %}
+                <li class="dh-section-subnav-item{% if grandchild.active %} is-active{% endif %}">
+                  <a href="{{ grandchild.url|url }}">
+                    <span class="text">{{ grandchild.title }}</span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </aside>
+{% endif %}

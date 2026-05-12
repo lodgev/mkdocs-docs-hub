@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="dh-404">
+  <div class="dh-404-card">
+    <div class="dh-badge">404</div>
+    <h1>Page not found</h1>
+    <p>The page you requested does not exist or has moved.</p>
+    <a class="dh-button dh-button-primary" href="{{ nav.homepage.url|url if nav and nav.homepage else config.site_url|default('/') }}">Back to home</a>
+  </div>
+</section>
+{% endblock %}

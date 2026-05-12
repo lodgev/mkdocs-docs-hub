@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="dh-layout">
+    <div class="dh-article-column">
+      {% if page and page.meta and page.meta.hide and "title" in page.meta.hide %}
+      {% else %}
+        {% include "partials/page-context.html" %}
+      {% endif %}
+
+      <article class="dh-article-card">
+        {{ page.content }}
+      </article>
+    </div>
+
+    <div class="dh-right-column">
+      {% include "partials/section-nav.html" %}
+      {% include "partials/toc.html" %}
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{# -------------------------------------------------------------------------
+   Page context header
+   Finds the currently active top-level section and renders:
+   - section badge
+   - section-local subnavigation
+   Falls back to a generic page context if no active section is found.
+   ------------------------------------------------------------------------- #}
+
+{% set ns = namespace(active_section=None) %}
+
+{% if nav %}
+  {% for item in nav %}
+    {% if item.active and item.children %}
+      {% set ns.active_section = item %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+<div class="dh-page-header-card">
+  <div class="dh-page-context">
+    {% if ns.active_section %}
+      <span class="dh-badge">{{ ns.active_section.title }}</span>
+
+      <nav class="dh-page-subnav" aria-label="{{ ns.active_section.title }} navigation">
+        {% for child in ns.active_section.children %}
+          <a
+            href="{{ child.url|url }}"
+            class="dh-page-subnav-link{% if child.active %} is-active{% endif %}"
+          >
+            {{ child.title }}
+          </a>
+        {% endfor %}
+      </nav>
+    {% else %}
+      <span class="dh-badge">Docs Hub</span>
+      <span class="dh-page-title-inline">{{ page.title }}</span>
+    {% endif %}
+  </div>
+</div>

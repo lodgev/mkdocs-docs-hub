@@ -1,0 +1,46 @@
+{# -------------------------------------------------------------------------
+   Recursive/section-aware navigation item
+   - If item has children, render it as an expandable section
+   - Otherwise render it as a regular navigation link
+   ------------------------------------------------------------------------- #}
+
+{% if item.children %}
+  <li class="dh-nav-item dh-nav-section{% if item.active %} is-active{% endif %}">
+    <div class="dh-nav-section-row">
+      {% if item.url %}
+        <a href="{{ item.url|url }}" class="dh-nav-section-link">
+          <span class="text">{{ item.title }}</span>
+        </a>
+      {% else %}
+        <span class="dh-nav-section-link is-static">
+          <span class="text">{{ item.title }}</span>
+        </span>
+      {% endif %}
+
+      <button
+        class="dh-nav-toggle"
+        type="button"
+        aria-expanded="{% if item.active %}true{% else %}false{% endif %}"
+        aria-label="Toggle {{ item.title }}"
+      >
+        <span class="dh-nav-toggle-line"></span>
+      </button>
+    </div>
+
+    <ul class="dh-nav-sublist"{% if not item.active %} hidden{% endif %}>
+      {% for child in item.children %}
+        <li class="dh-nav-subitem{% if child.active %} is-active{% endif %}">
+          <a href="{{ child.url|url }}">
+            <span class="text">{{ child.title }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </li>
+{% else %}
+  <li class="dh-nav-item{% if item.active %} active{% endif %}">
+    <a href="{{ item.url|url }}">
+      <span class="text">{{ item.title }}</span>
+    </a>
+  </li>
+{% endif %}

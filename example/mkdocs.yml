@@ -1,0 +1,29 @@
+site_name: Docs Hub
+site_description: Lite MkDocs documentation theme
+site_url: http://127.0.0.1:8000/
+
+theme:
+  name: docs-hub
+
+nav:
+  - Home: index.md
+  - Getting started:
+      - Quick start: guides/quick-start.md
+  - Reference:
+      - Theme anatomy: reference/theme-anatomy.md
+      - Styling tokens: reference/styling-tokens.md
+  - Components: components.md
+  - FAQ: faq.md
+
+plugins:
+  - search:
+      min_search_length: 2
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true

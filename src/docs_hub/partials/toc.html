@@ -1,0 +1,24 @@
+{# -------------------------------------------------------------------------
+   Recursive table of contents
+   Renders page.toc.items as nested lists.
+   ------------------------------------------------------------------------- #}
+
+{% macro render_toc(items, level=1) %}
+  {% if items %}
+    <ul class="dh-toc-list dh-toc-level-{{ level }}">
+      {% for item in items %}
+        <li class="dh-toc-item">
+          <a href="{{ item.url }}" class="dh-toc-link">{{ item.title }}</a>
+          {{ render_toc(item.children, level + 1) }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+
+{% if page and page.toc and page.toc.items %}
+  <aside class="dh-toc-card">
+    <h2>On this page</h2>
+    {{ render_toc(page.toc.items) }}
+  </aside>
+{% endif %}
