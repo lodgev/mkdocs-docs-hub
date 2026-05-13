@@ -1,2 +1,0 @@
-[mkdocs.themes]
-docs-hub = docs_hub
